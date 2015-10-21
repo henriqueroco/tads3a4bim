@@ -32,6 +32,24 @@
         <version>3.1.0</version>
         <scope>provided</scope>
       </dependency>
+      <dependency>
+        <groupId>javax.enterprise</groupId>
+        <artifactId>cdi-api</artifactId>
+        <version>1.1</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate.javax.persistence</groupId>
+        <artifactId>hibernate-jpa-2.1-api</artifactId>
+        <version>1.0.0.Draft-16</version>
+        <scope>provided</scope>
+      </dependency>
+      <dependency>
+        <groupId>javax.faces</groupId>
+        <artifactId>javax.faces-api</artifactId>
+        <version>2.2</version>
+        <scope>provided</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -49,6 +67,27 @@
       <artifactId>javax.servlet-api</artifactId>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-jpamodelgen</artifactId>
+      <version>5.0.2.Final</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.faces</groupId>
+      <artifactId>javax.faces-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <finalName>ExJms</finalName>
@@ -58,6 +97,38 @@
         <version>2.4</version>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
+        <version>3.1.0-beta1</version>
+        <executions>
+          <execution>
+            <id>process</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>process</goal>
+            </goals>
+            <configuration>
+              <processors>
+                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+              </processors>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>5.0.2.Final</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <proc>none</proc>
         </configuration>
       </plugin>
     </plugins>
