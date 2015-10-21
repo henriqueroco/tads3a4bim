@@ -24,7 +24,7 @@ public class AlunoServletJMS2 extends HttpServlet {
 	private Queue fila;
  
 	@Inject
-	@JMSConnectionFactory("java:/ConnectionFactory")
+//	@JMSConnectionFactory("java:/ConnectionFactory")
 	private JMSContext context;
  
 	protected void doGet(HttpServletRequest request,
